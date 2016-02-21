@@ -44,6 +44,17 @@ namespace AspnetTestProj
             loggerFactory.AddConsole(LogLevel.Verbose);
             loggerFactory.AddDebug(minLevel: LogLevel.Information);
 
+            if (env.IsDevelopment())
+            {
+                app.UseBrowserLink();
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+                
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
             app.UseIISPlatformHandler();
 
             app.Run(async (context) =>
